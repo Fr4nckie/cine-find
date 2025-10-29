@@ -1,5 +1,6 @@
 import { useMediaQuery } from "@uidotdev/usehooks"
 import ReactPaginate from "react-paginate"
+import { useLanguage } from "../hooks/useLanguage.ts"
 
 type PaginationControlsProps = {
   page: number
@@ -13,11 +14,14 @@ const PaginationControls = ({
   totalPages,
 }: PaginationControlsProps) => {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)")
+  const { lang } = useLanguage()
 
   const NextButton = () => {
     return (
       <button className="join-item btn btn-sm md:btn-md">
-        <span className="hidden md:block">Next</span>{" "}
+        <span className="hidden md:block">
+          {lang === "en-US" ? "Next" : "Suivant"}
+        </span>{" "}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -53,7 +57,9 @@ const PaginationControls = ({
             d="M15.75 19.5 8.25 12l7.5-7.5"
           />
         </svg>{" "}
-        <span className="hidden md:block">Previous</span>
+        <span className="hidden md:block">
+          {lang === "en-US" ? "Previous" : "Précédent"}
+        </span>
       </button>
     )
   }

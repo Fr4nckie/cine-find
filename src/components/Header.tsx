@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import ToggleThemeButton from "./ToggleThemeButton.tsx"
+import SelectLanguage from "./SelectLanguage.tsx"
 
 const Header = () => {
   return (
@@ -8,7 +9,10 @@ const Header = () => {
         <Link to="/">
           <h1 className="text-lg md:text-2xl font-bold">CineFind</h1>
         </Link>
-        <ToggleThemeButton />
+        <div className="flex items-center gap-4">
+          <SelectLanguage />
+          <ToggleThemeButton />
+        </div>
       </div>
     </header>
   )
