@@ -1,7 +1,12 @@
+import { useLanguage } from "../hooks/useLanguage.ts"
 import { useSearchForm } from "../hooks/useSearchForm.ts"
 
 const Searchbar = () => {
   const { query, handleQueryChange, handleSearchSubmit } = useSearchForm()
+  const { lang } = useLanguage()
+
+  const placeholder =
+    lang === "en-US" ? "Search a movie..." : "Rechercher un film..."
 
   return (
     <form className="container mx-auto px-4" onSubmit={handleSearchSubmit}>
@@ -25,7 +30,7 @@ const Searchbar = () => {
         <input
           type="search"
           className="grow"
-          placeholder="Search a movie..."
+          placeholder={placeholder}
           value={query}
           onChange={handleQueryChange}
         />

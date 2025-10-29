@@ -1,3 +1,4 @@
+import type { GlobalLanguage } from "../types/context.ts"
 import type {
   MediaListResponse,
   MediaTypeParams,
@@ -7,11 +8,12 @@ import { api } from "./api.ts"
 
 export const getTrendingMedia = async (
   page: number,
+  language: GlobalLanguage = "en-US",
   mediaType: MediaTypeParams = "all",
   timeWindow: TimeWindow = "week"
 ): Promise<MediaListResponse> => {
   const response = await api.get(`/trending/${mediaType}/${timeWindow}`, {
-    params: { page },
+    params: { page, language },
   })
   return response.data
 }

@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom"
+import { useLanguage } from "../hooks/useLanguage.ts"
 
 const BackButton = () => {
   const navigate = useNavigate()
+  const { lang } = useLanguage()
+  const label = lang === "en-US" ? "Back" : "Retour"
 
   return (
     <button
@@ -22,7 +25,7 @@ const BackButton = () => {
           d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
         />
       </svg>
-      <span className="hidden md:block">Back</span>
+      <span className="hidden md:block">{label}</span>
     </button>
   )
 }
