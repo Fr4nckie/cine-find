@@ -16,30 +16,45 @@ const MediaCard = ({ mediaItem }: MediaCardProps) => {
   const { isDark } = useTheme()
 
   const title = getMediaTitle(mediaItem)
+  const image = getMediaPosterUrl(mediaItem)
 
   const handleClick = () => navigate(`/${mediaItem.media_type}/${mediaItem.id}`)
 
   return (
-    <div className="card bg-base-100 sm:w-full shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 cursor-pointer">
-      <figure className="aspect-[2/3]">
+    <div
+      className="relative group w-full p-2 md:p-4 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
+      onClick={handleClick}
+    >
+
+      <div
+        className="absolute inset-0 z-0 blur-2xl scale-125 opacity-80 transition-all duration-500 group-hover:opacity-100"
+        style={{
+          backgroundImage: `
+            linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1)),
+            url(${image})
+          `,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      <figure className="relative z-10 aspect-[2/3] overflow-hidden rounded-lg">
         <img
-          src={getMediaPosterUrl(mediaItem)}
+          src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           loading="lazy"
-          onClick={handleClick}
+          className="w-full h-full object-cover rounded-lg transform transition-transform duration-500 group-hover:scale-105"
         />
       </figure>
-      <div className="card-body relative pb-12">
-        <h2
-          className="card-title text-base md:text-lg capitalize line-clamp-2 hover:underline"
-          onClick={handleClick}
-        >
+
+      {/* === Titre + Date === */}
+      <div className="relative z-10 text-center py-3">
+        <h2 className="text-base md:text-lg font-semibold text-white line-clamp-1 group-hover:underline">
           {title}
         </h2>
         <p
-          className={`absolute bottom-4 ${
-            isDark ? "text-gray-400" : "text-gray-500"
+          className={`mt-1 text-sm md:text-base ${
+            isDark ? "text-gray-400" : "text-gray-800"
           }`}
         >
           {getMediaStartDate(mediaItem)}
