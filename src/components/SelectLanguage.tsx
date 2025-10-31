@@ -11,7 +11,7 @@ const SelectLanguage = () => {
   return (
     <select
       defaultValue={lang}
-      className="select select-info"
+      className="select select-sm md:select-md"
       onChange={handleChange}
     >
       <option disabled={true}>
