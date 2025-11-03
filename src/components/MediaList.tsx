@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom"
 import { useSearchMedia } from "../hooks/useSearchMedia.ts"
 import type { Movie, TVShow } from "../types/types.ts"
 import ErrorMessage from "./ErrorMessage.tsx"
-import MediaCard from "./MediaCard.tsx"
+import MediaCard from "./MediaCard/MediaCard.tsx"
 
 const MediaList = () => {
   const [params] = useSearchParams()

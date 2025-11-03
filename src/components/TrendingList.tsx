@@ -1,9 +1,9 @@
 import { useTrendingMedia } from "../hooks/useTrendingMedia.ts"
 import ErrorMessage from "./ErrorMessage.tsx"
 import Loading from "./Loading.tsx"
-import MediaCard from "./MediaCard.tsx"
 import { useTrendingPagination } from "../hooks/useTrendingPagination.ts"
 import PaginationControls from "./PaginationControls.tsx"
+import MediaCard from "./MediaCard/MediaCard.tsx"
 
 const TrendingList = () => {
   const { page, goToPage } = useTrendingPagination()
