@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
-import ToggleThemeButton from "./ToggleThemeButton.tsx"
-import SelectLanguage from "./SelectLanguage.tsx"
+import ToggleThemeButton from "../ToggleThemeButton.tsx"
+import SelectLanguage from "../SelectLanguage.tsx"
 
 const Header = () => {
   return (
