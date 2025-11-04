@@ -56,6 +56,14 @@ Other useful script
 - `npm run preview` : Preview the built version locally.
 
 - `npm run lint` : Check the code using ESLint.
+
+## Tests
+
+Run the test suite using Vitest
+
+```bash
+npm run test
+```
     
 ## License
 
