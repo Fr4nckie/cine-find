@@ -1,12 +1,13 @@
-import { vi, describe, beforeEach, it } from "vitest"
+import { vi, describe, beforeEach, it, expect } from "vitest"
 import { userEvent } from "@testing-library/user-event"
 import type { MediaItem } from "../../types/types.ts"
 import { render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router-dom"
 import MediaCard from "./MediaCard.tsx"
 
+const mockUseTheme = vi.fn()
 vi.mock("../../hooks/useTheme.ts", () => ({
-  useTheme: () => ({ isDark: true }),
+  useTheme: () => mockUseTheme(),
 }))
 
 vi.mock("../../utils/getMediaContent.ts", () => ({
@@ -45,17 +46,41 @@ describe("<MediaCard> component", () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
+    mockUseTheme.mockReturnValue({ isDark: true })
   })
 
-  it("should renders correctly with media title and date", () => {
+  it("should renders correctly with media title and date in dark mode", () => {
     render(
       <MemoryRouter>
         <MediaCard mediaItem={mockMovie} />
       </MemoryRouter>
     )
 
+    const startDate = screen.getByText("2025-10-29")
+    expect(startDate).toBeInTheDocument()
+    expect(startDate).toHaveClass("text-gray-400")
+
     expect(screen.getByText("The Rats: A Witcher Tale")).toBeInTheDocument()
-    expect(screen.getByText("2025-10-29")).toBeInTheDocument()
+
+    const img = screen.getByRole("img") as HTMLImageElement
+    expect(img.src).toContain(
+      "https://img.test/5Gr4amaB1xxeYAEMOdrVutaWwgz.jpg"
+    )
+  })
+
+  it("should renders correctly with media title and date in light mode", () => {
+    mockUseTheme.mockReturnValue({ isDark: false })
+    render(
+      <MemoryRouter>
+        <MediaCard mediaItem={mockMovie} />
+      </MemoryRouter>
+    )
+
+    const startDate = screen.getByText("2025-10-29")
+    expect(startDate).toBeInTheDocument()
+    expect(startDate).toHaveClass("text-gray-800")
+
+    expect(screen.getByText("The Rats: A Witcher Tale")).toBeInTheDocument()
 
     const img = screen.getByRole("img") as HTMLImageElement
     expect(img.src).toContain(
