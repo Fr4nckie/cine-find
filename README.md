@@ -49,6 +49,9 @@ Start the development server
 npm run dev
 ```
 
+Live Demo: https://cine-find.netlify.app/
+
+
 Other useful script
 
 - `npm run build` : Build the project for production.
